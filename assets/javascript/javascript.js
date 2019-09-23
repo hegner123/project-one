@@ -20,6 +20,7 @@ $(document).ready(function(){
         }
       }
       
+      
       $.ajax(settings).done(function (response) {
         var results = response.result.data
         for (i=0;i<5;i++) {
