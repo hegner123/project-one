@@ -6,6 +6,11 @@
     <link rel="stylesheet" href="https://js.arcgis.com/4.12/esri/themes/light/main.css">
   <script src="https://js.arcgis.com/4.12/"></script>
   <script src="index.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+  
+  <script src="assets/javascript/javascript.js"></script>
     <title>ArcGIS JavaScript Tutorials: Create a JavaScript starter app</title>
     <style>
       html, body {
@@ -29,7 +34,25 @@
     </style>
   </head>
   <body>
+<div class="container">
+    <div class="row">
+      <div class="col col-12 mt-5 main-section">
+        <div class="row">
+            <div class="col col-12 spacer"></div>
+          <div class="col col-5 m-auto text-center">
+            <input type="number" name="zip-search" id="zip-search">
+           <button id="api-request">Zip Search</button>
+           <div id="display"></div>
+           this
+            
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
     <div id="viewDiv"></div>
     <div id="mapToggle"></div>
     
   </body>
+
