@@ -1,0 +1,14 @@
+.main-section {
+  background:grey;
+  height:40rem;
+}
+
+.spacer {
+  height:250px;
+  width: 100%;
+}
+
+#display {
+  font-size:24px;
+  color: white;
+}
