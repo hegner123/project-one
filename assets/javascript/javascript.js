@@ -21,7 +21,8 @@ $(document).ready(function(){
       }
       
       
-      $.ajax(settings).done(function (response) {
+      $.ajax(settings)
+      .then(function (response) {
         var results = response.result.data
         for (i=0;i<5;i++) {
           var option = $('<div>');
@@ -35,6 +36,8 @@ $(document).ready(function(){
     } else {
       $("#display").text("Please enter a zip code");
     };
+
+    
 
     
     
