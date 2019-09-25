@@ -1,3 +1,6 @@
+var thing;
+var thing2;
+var displayData = [];
 
 require([
   "esri/Map",
@@ -105,7 +108,7 @@ $(document).ready(function(){
   // zip search
 
   $("#api-request").on("click", function(){
-    var menuResults;
+    
     var input1 = $("#zip-search").val();
     var inputCheck = input1.toString();
     var idValue;
@@ -133,29 +136,14 @@ $(document).ready(function(){
         
         
         for (i=0;i<5;i++) {
+          var option = $('<div>');
           idValue = results[i].restaurant_id;
-          console.log(idValue);
-          var settings2 = {
-            "async": true,
-            "crossDomain": true,
-            "url": "https://us-restaurant-menus.p.rapidapi.com/restaurant/" + idValue + "/menuitems?page=1",
-            "method": "GET",
-            "headers": {
-              "x-rapidapi-host": "us-restaurant-menus.p.rapidapi.com",
-              "x-rapidapi-key": "9b86b8e8a6mshdc12005b60b2e9bp17f3b5jsn2a7b1e24c609"
-            }
-          }
+          apiCall2(idValue,results[i].restaurant_name);
           
-          
-          $.ajax(settings2)
-          .then(function (response2) {
-            menuResults = response2.result.data
-            console.log(menuResults[i].menu_item_name);
-            var option = $('<div>');
-            option.text(results[i].restaurant_name + " " + menuResults[i].menu_item_name );
-            option.appendTo("#display");
-          });
-          
+          option.text(displayData);
+          console.log(displayData);
+          console.log(displayData.length);
+          option.appendTo("#display");
         };
         input1 ="";
         $("#zip-search").val("");
@@ -177,5 +165,27 @@ $(document).ready(function(){
   
   
 })
+
+
+
+function apiCall2(idValue, restaurant_name){
+var settings2 = {
+  "async": true,
+  "crossDomain": true,
+  "url": "https://us-restaurant-menus.p.rapidapi.com/restaurant/" + idValue + "/menuitems?page=1",
+  "method": "GET",
+  "headers": {
+    "x-rapidapi-host": "us-restaurant-menus.p.rapidapi.com",
+    "x-rapidapi-key": "9b86b8e8a6mshdc12005b60b2e9bp17f3b5jsn2a7b1e24c609"
+  }
+}
+
+$.ajax(settings2).then( function (response2) {
+  thing = response2.result.data;
+  thing2 = restaurant_name + " " + thing[0].menu_item_name;
+  
+  
+})
+};
 
 
