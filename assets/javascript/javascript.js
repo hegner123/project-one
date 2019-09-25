@@ -37,8 +37,8 @@ $(document).ready(function(){
       $("#display").text("Please enter a zip code");
     };
 
-    
-
+    var results = response.hits
+$("#display").text(results[0].nf_calories)
     
     
    
