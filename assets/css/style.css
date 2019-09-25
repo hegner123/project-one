@@ -20,6 +20,10 @@ html, body {
   color: white;
 }
 
+#mapDiv{
+  height:20rem;
+}
+
 
 #viewDiv {
   padding: 0%;
@@ -27,6 +31,8 @@ html, body {
   height: 75%;
   width: 75%;
 }
+
+
 
 #mapToggle {
     height: 100%;
