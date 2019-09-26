@@ -89,7 +89,7 @@ $(document).ready(function () {
 
   $("#add-options").on('click', function () {
     var userInput = $("#options-add").val().trim();
-    var output = $("<div>");
+    var output = $('<div class="user-item">');
     output.text(userInput);
     output.appendTo(".options-display");
     userArray.push(userInput);
@@ -100,6 +100,11 @@ $(document).ready(function () {
     userArray = [];
     $("#options-add").val("");
     $(".options-display").empty()
+  })
+
+  $("#api-reset").on("click", function () {
+    
+    $("#display").empty()
   })
 
   function compare(x, y) {
@@ -127,7 +132,7 @@ $(document).ready(function () {
         .then(function (response) {
           var results = response.result.data
           console.log(results);
-          for (i = 0; i < 10; i++) {
+          for (i = 0; i < results.length; i++) {
             console.log(results[i].cuisines)
             var items = userArray.toString(", ");
             var cuisine = results[i].cuisines
@@ -171,37 +176,9 @@ function apiCall2(idValue, restaurant_name) {
     var menuResults = response2.result.data;
     console.log(menuResults);
     var resultText = "Restaurant:" + restaurant_name + "|| Menu Item: " + menuResults[0].menu_item_name;
-    var option = $('<div>');
+    var option = $('<div class="col col-12 p-1 options">');
     option.text(resultText);
     option.appendTo("#display");
   })
 };
 
-
-
-function menuFields() {
-
-  var fields = {
-    name: "cheeseburger"
-  };
-
-  var paramaters = $.param(fields);
-
-
-  console.log("menuFields Launch")
-  var settings = {
-    "async": true,
-    "crossDomain": true,
-    "url": "https://us-restaurant-menus.p.rapidapi.com/menuitems/search/fields?page=1&fields=" + paramaters,
-    "method": "GET",
-    "headers": {
-      "x-rapidapi-host": "us-restaurant-menus.p.rapidapi.com",
-      "x-rapidapi-key": "9b86b8e8a6mshdc12005b60b2e9bp17f3b5jsn2a7b1e24c609"
-    }
-  }
-
-  $.ajax(settings).done(function (response) {
-    console.log(response);
-    console.log("-----------------------------------------------------------------------")
-  });
-}
