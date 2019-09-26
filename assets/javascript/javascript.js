@@ -56,27 +56,19 @@ require([
   // ***************************************************************
 
   var basemapToggle = new BasemapToggle({
-
-
       view: view,
       nextBasemap: "streets-navigation-vector"
   })
   view.ui.add(basemapToggle, "bottom-right");
-
-  
-
   var trailheadsLayer = new FeatureLayer({
       url: "https://services.arcgis.com/V6ZHFr6zdgNZuVG0/arcgis/rest/services/Landscape_Trees/FeatureServer/0"
   })
   map.add(trailheadsLayer);
-
-  
   var point = {
       type: "point",
       longitude: -77.5387,
       latitude: 37.5752,
   };
-
   var simpleMarkerSymbol = {
       type: "simple-marker",
       color: (0, 0, 255),
@@ -90,16 +82,36 @@ require([
       symbol: simpleMarkerSymbol
   });
   view.graphics.add(pointGraphic);
-
-
 });
-
-
 // -----------------------------------------------------------------------------------------------------------------------------------
-
-
-
 $(document).ready(function(){
+  var userArray = [];
+
+  $("#add-options").on('click',function(){
+    var userInput = $("#options-add").val().trim();
+    var output = $("<div>");
+    output.text(userInput);
+    output.appendTo(".options-display");
+    userArray.push(userInput);
+    $("#options-add").val("");
+  })
+
+  $("#reset").on("click",function(){
+    userArray = [];
+    $("#options-add").val("");
+    $(".options-display").empty()
+  })
+
+  function compare(x,y){
+    return y.search(x);
+  }
+
+  
+
+
+
+
+
   // zip search
   $("#api-request").on("click", function(){
     var input1 = $("#zip-search").val();
@@ -121,23 +133,32 @@ $(document).ready(function(){
       .then(function (response) {
         var results = response.result.data
         console.log(results);
-        for (i=0;i<5;i++) {
-          idValue = results[i].restaurant_id;
-          console.log(idValue)
-          var idName = results[i].restaurant_name;
-          console.log( apiCall2 ( idValue, idName ) )
-          
+        for (i=0;i<10;i++) {
+          console.log(results[i].cuisines)
+          var items = userArray.toString(", ");
+          var cuisine = results[i].cuisines
+          var display = true;
+          for (j=0;j<cuisine.length;j++){
+            if (compare(cuisine[j],items) === 0){
+              display = false;
+              console.log("fail");
+            };
         };
+        if (display === true){
+          idValue = results[i].restaurant_id;
+          var idName = results[i].restaurant_name;
+          apiCall2 ( idValue, idName );
+        }
+        
         input1 ="";
         $("#zip-search").val("");
-      });
+      
+      }});
     } else {
       $("#display").text("Please enter a zip code");
     };
   })
 })
-
-
 
 function apiCall2(idValue, restaurant_name){
 var settings2 = {
@@ -150,15 +171,13 @@ var settings2 = {
     "x-rapidapi-key": "9b86b8e8a6mshdc12005b60b2e9bp17f3b5jsn2a7b1e24c609"
   }
 }
-var apiCallData = $.ajax(settings2).then( function (response2) {
+  $.ajax(settings2).then( function (response2) {
   var menuResults = response2.result.data;
   var resultText = "Restaurant:" + restaurant_name + "|| Menu Item: " + menuResults[0].menu_item_name;
-  console.log(resultText);
   var option = $('<div>');
   option.text(resultText);
   option.appendTo("#display");
 })
-return apiCallData;
 };
 
 
