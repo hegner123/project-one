@@ -37,15 +37,47 @@ $(document).ready(function(){
       $("#display").text("Please enter a zip code");
     };
 
-    
-
-    
-    
-   
-
   })
+
+
+$("#nutrients").on('click', function (){
+  console.log('click');
+  var nutritionix = {
+    "async": true,
+    "crossDomain": true,
+    "url": "https://nutritionix-api.p.rapidapi.com/v1_1/search/cheddar%20cheese?fields=item_name%2Citem_id%2Cbrand_name%2Cnf_calories%2Cnf_total_fat",
+    "method": "GET",
+    "headers": {
+      "x-rapidapi-host": "nutritionix-api.p.rapidapi.com",
+      "x-rapidapi-key": "fe9110a17emshef9973a41fd039bp17d9e1jsn166b23aaa528"
+    }
+  }
   
+ 
+    
+    $.ajax(nutritionix).done(function (response) {
+      var place = response.hits;
+      console.log(place);
+      var health = $('<div>');
+      health.text(place[0].fields.item_name + " " + place[0].fields.nf_calories + " " + place[0].fields.nf_total_fat);
+      health.appendTo('#facts');
+     
+     
+      // $('#restaurant').val();
+      // return facts
   
+    });
+    
+    
+
+  });
+  
+
+
 })
+
+ 
+  
+
 
 
