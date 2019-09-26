@@ -156,6 +156,23 @@ $(document).ready(function () {
   })
 })
 
+
+
+
+$("#nutrients").on('click', function (){
+  console.log('click');
+  var nutritionix = {
+    "async": true,
+    "crossDomain": true,
+    "url": "https://nutritionix-api.p.rapidapi.com/v1_1/search/cheddar%20cheese?fields=item_name%2Citem_id%2Cbrand_name%2Cnf_calories%2Cnf_total_fat",
+    "method": "GET",
+    "headers": {
+      "x-rapidapi-host": "nutritionix-api.p.rapidapi.com",
+      "x-rapidapi-key": "fe9110a17emshef9973a41fd039bp17d9e1jsn166b23aaa528"
+    }
+  }
+  });
+ 
 function apiCall2(idValue, restaurant_name) {
   var settings2 = {
     "async": true,
@@ -178,27 +195,22 @@ function apiCall2(idValue, restaurant_name) {
 };
 
 
+ $.ajax(nutritionix).done(function (response) {
+      var place = response.hits;
+      console.log(place);
+      var health = $('<div>');
+      health.text(place[0].fields.item_name + " " + place[0].fields.nf_calories + " " + place[0].fields.nf_total_fat);
+      health.appendTo('#facts');
+     
+     
+      // $('#restaurant').val();
+      // return facts
+  
+    });
 
-function menuFields() {
-
-  var fields = {
-    name: "cheeseburger"
-  };
-
-  var paramaters = $.param(fields);
 
 
-  console.log("menuFields Launch")
-  var settings = {
-    "async": true,
-    "crossDomain": true,
-    "url": "https://us-restaurant-menus.p.rapidapi.com/menuitems/search/fields?page=1&fields=" + paramaters,
-    "method": "GET",
-    "headers": {
-      "x-rapidapi-host": "us-restaurant-menus.p.rapidapi.com",
-      "x-rapidapi-key": "9b86b8e8a6mshdc12005b60b2e9bp17f3b5jsn2a7b1e24c609"
-    }
-  }
+
 
   $.ajax(settings).done(function (response) {
     console.log(response);
