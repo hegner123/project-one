@@ -1,7 +1,3 @@
-var thing;
-var thing2;
-var displayData = [];
-
 require([
   "esri/Map",
   "esri/views/MapView",
@@ -155,11 +151,11 @@ var settings2 = {
   }
 }
 var apiCallData = $.ajax(settings2).then( function (response2) {
-  thing = response2.result.data;
-  thing2 = "Restaurant:" + restaurant_name + " Menu: " + thing[0].menu_item_name;
-  console.log(thing2);
+  var menuResults = response2.result.data;
+  var resultText = "Restaurant:" + restaurant_name + "|| Menu Item: " + menuResults[0].menu_item_name;
+  console.log(resultText);
   var option = $('<div>');
-  option.text(thing2);
+  option.text(resultText);
   option.appendTo("#display");
 })
 return apiCallData;
