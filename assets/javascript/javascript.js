@@ -104,11 +104,8 @@ require([
 
 
 $(document).ready(function(){
-
   // zip search
-
   $("#api-request").on("click", function(){
-    
     var input1 = $("#zip-search").val();
     var inputCheck = input1.toString();
     var idValue;
@@ -124,46 +121,24 @@ $(document).ready(function(){
           "x-rapidapi-key": "9b86b8e8a6mshdc12005b60b2e9bp17f3b5jsn2a7b1e24c609"
         }
       }
-      
-      
-      
-
       $.ajax(settings)
       .then(function (response) {
         var results = response.result.data
-        
         console.log(results);
-        
-        
         for (i=0;i<5;i++) {
-          var option = $('<div>');
           idValue = results[i].restaurant_id;
-          apiCall2(idValue,results[i].restaurant_name);
+          console.log(idValue)
+          var idName = results[i].restaurant_name;
+          console.log( apiCall2 ( idValue, idName ) )
           
-          option.text(displayData);
-          console.log(displayData);
-          console.log(displayData.length);
-          option.appendTo("#display");
         };
         input1 ="";
         $("#zip-search").val("");
       });
-      
-      
-
     } else {
       $("#display").text("Please enter a zip code");
     };
-
-    
-
-    
-    
-   
-
   })
-  
-  
 })
 
 
@@ -179,13 +154,45 @@ var settings2 = {
     "x-rapidapi-key": "9b86b8e8a6mshdc12005b60b2e9bp17f3b5jsn2a7b1e24c609"
   }
 }
-
-$.ajax(settings2).then( function (response2) {
+var apiCallData = $.ajax(settings2).then( function (response2) {
   thing = response2.result.data;
-  thing2 = restaurant_name + " " + thing[0].menu_item_name;
-  
-  
+  thing2 = "Restaurant:" + restaurant_name + " Menu: " + thing[0].menu_item_name;
+  console.log(thing2);
+  var option = $('<div>');
+  option.text(thing2);
+  option.appendTo("#display");
 })
+return apiCallData;
 };
+
+
+
+function menuFields(){
+
+var fields = {
+  name:"cheeseburger"
+};
+
+var paramaters = $.param( fields );
+
+
+  console.log("menuFields Launch")
+  var settings = {
+    "async": true,
+    "crossDomain": true,
+    "url": "https://us-restaurant-menus.p.rapidapi.com/menuitems/search/fields?page=1&fields=" + paramaters,
+    "method": "GET",
+    "headers": {
+      "x-rapidapi-host": "us-restaurant-menus.p.rapidapi.com",
+      "x-rapidapi-key": "9b86b8e8a6mshdc12005b60b2e9bp17f3b5jsn2a7b1e24c609"
+    }
+  }
+  
+  $.ajax(settings).done(function (response) {
+    console.log(response);
+    console.log("-----------------------------------------------------------------------")
+  });
+}
+
 
 
