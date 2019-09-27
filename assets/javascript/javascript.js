@@ -92,7 +92,6 @@ $(document).ready(function () {
   $("#add-options").on('click', function () {
     var userInput = $("#options-add").val().trim();
     var output = $('<div class="user-item">');
-    
     output.text(userInput);
     output.appendTo(".options-display");
     userArray.push(userInput);
@@ -106,7 +105,6 @@ $(document).ready(function () {
   })
 
   $("#api-reset").on("click", function () {
-    
     $("#display").empty()
   })
 
@@ -177,17 +175,34 @@ function apiCall2(idValue, restaurant_name) {
     var menuResults = response2.result.data;
     console.log(menuResults);
     var resultText = "Restaurant:" + restaurant_name + "|| Menu Item: " + menuResults[0].menu_item_name;
-    var resultGeoLat = menuResults[0].geo.lat;
-    var resultGeoLon = menuResults[0].geo.lon;
-    console.log(resultGeoLon);
-    console.log(resultGeoLat);
-    var staticMap = $('<img src="https://maps.googleapis.com/maps/api/staticmap?center='+resultGeoLat+','+ resultGeoLon+'zoom=14&size=400x400&key=AIzaSyAoEZ5plSSL8WtrfHP-1-MHmQgcNtSr0wQ">')
+    // var resultGeoLat = menuResults[0].geo.lat;
+    // var resultGeoLon = menuResults[0].geo.lon;
+    var streetAdr = menuResults[0].address.street;
+    var cityAdr = menuResults[0].address.city;
+    var stateAdr = menuResults[0].address.state;
+    // var zipAdr = menuResults[0].address.zip;
+    // console.log(resultGeoLon);
+    // console.log(resultGeoLat);
+    // var staticUrl = 'https://maps.googleapis.com/maps/api/staticmap?center=' + resultGeoLat + ','+ resultGeoLon + '&zoom=18&size=400x400&key=AIzaSyAoEZ5plSSL8WtrfHP-1-MHmQgcNtSr0wQ'
+    var staticUrl = 'https://maps.googleapis.com/maps/api/staticmap?center=' + streetAdr + '+' + cityAdr + '+' + stateAdr + '+' + '&zoom=17&size=400x400&key=AIzaSyAoEZ5plSSL8WtrfHP-1-MHmQgcNtSr0wQ'
+    var staticMap = $('<img src="'+ staticUrl +'">')
     var option = $('<div class="col col-12 p-1 options">');
     option.text(resultText);
     option.appendTo("#display");
     staticMap.appendTo("#display");
   })
 };
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -221,11 +236,4 @@ $("#nutrients").on('click', function (){
   });
 
 
-var array2 = [];
-
-function stringPush(x,y,z){
-  x.push(z);
-  y.push(z);
-}
-  
 
