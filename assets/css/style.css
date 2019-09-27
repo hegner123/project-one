@@ -13,7 +13,9 @@ body{
 }
 
 #display {
+
   background: grey;
+
   font-size:12px;
   color: white;
   overflow: auto;
