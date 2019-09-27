@@ -1,3 +1,4 @@
+// Arcgis Code Section----------------------------------------------------------------------
 require([
   "esri/Map",
   "esri/views/MapView",
@@ -18,6 +19,7 @@ require([
     center: [-77.434769, 37.541290], // longitude, latitude
     zoom: 11
   });
+
 
 
   // ***************************************************************
@@ -85,8 +87,12 @@ require([
 });
 
 
-// -----------------------------------------------------------------------------------------------------------------------------------
+
+// ArcGis Section End-----------------------------------------------------------------------------------------------------------------------------------
 $(document).ready(function () {
+  $(".screen-one").show();
+  $(".screen-three").hide();
+  // zip search
   var userArray = [];
 
   $("#add-options").on('click', function () {
@@ -113,6 +119,7 @@ $(document).ready(function () {
   }
 
   $("#api-request").on("click", function () {
+    $(".screen-three").hide();
     var input1 = $("#zip-search").val();
     var inputCheck = input1.toString();
     var idValue;
@@ -149,16 +156,19 @@ $(document).ready(function () {
               console.log(idName);
               apiCall2(idValue, idName);
             }
+
+
             input1 = "";
             $("#zip-search").val("");
+            $(".screen-one").hide();
+            $(".screen-three").show();
+
           }
         });
     } else {
       $("#display").text("Please enter a zip code");
     };
   })
-})
-
 
 function apiCall2(idValue, restaurant_name) {
   var settings2 = {
@@ -194,19 +204,6 @@ function apiCall2(idValue, restaurant_name) {
 };
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 $("#nutrients").on('click', function (){
   console.log('click');
   var nutritionix = {
@@ -226,14 +223,8 @@ $("#nutrients").on('click', function (){
       var health = $('<div>');
       health.text(place[0].fields.item_name + " " + place[0].fields.nf_calories + " " + place[0].fields.nf_total_fat);
       health.appendTo('#facts');
-     
-     
       // $('#restaurant').val();
       // return facts
-  
     });
-
   });
-
-
-
+  });

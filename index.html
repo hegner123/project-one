@@ -1,54 +1,62 @@
 <!DOCTYPE html>
 
-  <head>
+
+<head>
   <meta charset="utf-8">
   <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="https://js.arcgis.com/4.12/esri/themes/light/main.css">
   <link rel="stylesheet" href="assets/css/style.css">
   <script src="https://js.arcgis.com/4.12/"></script>
-  <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+    crossorigin="anonymous"></script>
   <script src="assets/javascript/javascript.js"></script>
-    <title>C-Jam Project One</title>
-  </head>
+  <title>C-Jam Project One</title>
+</head>
   <body>
-<div class="container">
-    <div class="row">
-      <div class="col col-12 mt-5 main-section">
-        <div class="row">
-          <div class="col col-12 mt-5">
-              <input type="text" name="options-add" id="options-add">
-              <button id="add-options">Add</button>
-              <button id="reset">Reset</button>
-              <div class="options-display"></div>
-          </div>
+    <div class="container">
 
-          <div class="col col-12 mt-3"> 
-            <input type="number" name="zip-search" id="zip-search">
-            <button id="api-request">Zip Search</button>
-            <button id="api-reset">Reset</button>
-            <button id="call">Test</button>
-            
-            <input type="text" name="restaurant" id="restaurant" class="">
-            <button id="nutrients">What's in it</button>
-            <div id="facts"></div>
-           
+      <div class="screen-one">
+        <div class="row">
+          <div class="col col-12 mt-5 main-section">
+            <div class="row">
+              <div class="col col-12 mt-5">
+                <input type="text" name="options-add" id="options-add">
+                <button id="add-options">Add</button>
+                <button id="reset">Reset</button>
+                <div class="options-display"></div> 
+              </div>
+
+              <div class="col col-12 mt-3">
+                <input type="number" name="zip-search" id="zip-search">
+                <button id="api-request">Zip Search</button>
+                <button id="api-reset">Reset</button>
+                <button id="call">Test</button>
+                <input type="text" name="restaurant" id="restaurant">
+                <button id="nutrients">What's in it</button>
+                <div id="facts"></div>
+              </div>
+
+              
+            </div>
           </div>
-          <div id="display" class="col col-12"></div>
         </div>
       </div>
-    </div>
 
-    <div class="row">
-      <div class="col col-12 d-none" id="mapDiv">
-        <div id="viewDiv" class="col col-12"></div>
-        <div id="mapToggle"></div>
+      <div class="screen-three">
+        <div class="row">
+            <div id="display" class="col col-12"></div>
+
+          <div class="col col-12" id="mapDiv">
+            <div id="viewDiv" class="col col-12"></div>
+            <div id="mapToggle"></div>
+          </div>
+        </div>
       </div>
-    </div>
 
- 
-  </div>
-  
+    </div>
   </body>
 </html>
+
 
