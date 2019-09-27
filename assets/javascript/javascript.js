@@ -137,27 +137,28 @@ $(document).ready(function () {
       }
       $.ajax(settings)
         .then(function (response) {
-          var results = response.result.data
-          console.log(results);
+          var results = response.result.data;
           for (i = 0; i < results.length; i++) {
-            console.log(results[i].cuisines)
-            var items = userArray.toString(", ");
-            var cuisine = results[i].cuisines
+            console.log(results[i].cuisines);
+            var items = userArray;
+            var cuisine = results[i].cuisines;
             var display = true;
             for (j = 0; j < cuisine.length; j++) {
-              if (compare(cuisine[j], items) === 0) {
-                display = false;
-                console.log("fail");
+              console.log("loop1");
+              for (k = 0; k <items.length; k++){
+                if (cuisine[j] === items[k]){
+                  display = false;
+                  console.log("fail");
+                };
               };
             };
             if (display === true) {
               idValue = results[i].restaurant_id;
               var idName = results[i].restaurant_name;
               console.log(idName);
+              console.log("----------------------------------------")
               apiCall2(idValue, idName);
             }
-
-
             input1 = "";
             $("#zip-search").val("");
             $(".screen-one").hide();
@@ -195,17 +196,24 @@ function apiCall2(idValue, restaurant_name) {
     // console.log(resultGeoLat);
     // var staticUrl = 'https://maps.googleapis.com/maps/api/staticmap?center=' + resultGeoLat + ','+ resultGeoLon + '&zoom=18&size=400x400&key=AIzaSyAoEZ5plSSL8WtrfHP-1-MHmQgcNtSr0wQ'
     var staticUrl = 'https://maps.googleapis.com/maps/api/staticmap?center=' + streetAdr + '+' + cityAdr + '+' + stateAdr + '+' + '&zoom=17&size=400x400&key=AIzaSyAoEZ5plSSL8WtrfHP-1-MHmQgcNtSr0wQ'
-    var staticMap = $('<img src="'+ staticUrl +'">')
-    var option = $('<div class="col col-12 p-1 options">');
+    var staticMap = $('<img class=" col col-12 static-map" data="'+ restaurant_name +'"src="'+ staticUrl +'">')
+    var option = $('<div class="col col-12 p-5 options">');
     option.text(resultText);
+    option.attr('data', restaurant_name)
     option.appendTo("#display");
-    staticMap.appendTo("#display");
+    staticMap.appendTo(option);
+    $(".static-map").hide();
+    
   })
 };
 
+$(".options").on('click',function(){
+  $(this).children().show();
+})
+
 
 $("#nutrients").on('click', function (){
-  console.log('click');
+  
   var nutritionix = {
     "async": true,
     "crossDomain": true,
@@ -219,7 +227,7 @@ $("#nutrients").on('click', function (){
 
  $.ajax(nutritionix).done(function (response) {
       var place = response.hits;
-      console.log(place);
+      
       var health = $('<div>');
       health.text(place[0].fields.item_name + " " + place[0].fields.nf_calories + " " + place[0].fields.nf_total_fat);
       health.appendTo('#facts');
