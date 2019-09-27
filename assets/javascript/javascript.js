@@ -83,6 +83,8 @@ require([
   });
   view.graphics.add(pointGraphic);
 });
+
+
 // -----------------------------------------------------------------------------------------------------------------------------------
 $(document).ready(function () {
   var userArray = [];
@@ -90,6 +92,7 @@ $(document).ready(function () {
   $("#add-options").on('click', function () {
     var userInput = $("#options-add").val().trim();
     var output = $('<div class="user-item">');
+    
     output.text(userInput);
     output.appendTo(".options-display");
     userArray.push(userInput);
@@ -111,7 +114,6 @@ $(document).ready(function () {
     return y.search(x);
   }
 
-  // zip search
   $("#api-request").on("click", function () {
     var input1 = $("#zip-search").val();
     var inputCheck = input1.toString();
@@ -149,10 +151,8 @@ $(document).ready(function () {
               console.log(idName);
               apiCall2(idValue, idName);
             }
-
             input1 = "";
             $("#zip-search").val("");
-
           }
         });
     } else {
@@ -160,6 +160,34 @@ $(document).ready(function () {
     };
   })
 })
+
+
+function apiCall2(idValue, restaurant_name) {
+  var settings2 = {
+    "async": true,
+    "crossDomain": true,
+    "url": "https://us-restaurant-menus.p.rapidapi.com/restaurant/" + idValue + "/menuitems?page=1",
+    "method": "GET",
+    "headers": {
+      "x-rapidapi-host": "us-restaurant-menus.p.rapidapi.com",
+      "x-rapidapi-key": "9b86b8e8a6mshdc12005b60b2e9bp17f3b5jsn2a7b1e24c609"
+    }
+  }
+  $.ajax(settings2).then(function (response2) {
+    var menuResults = response2.result.data;
+    console.log(menuResults);
+    var resultText = "Restaurant:" + restaurant_name + "|| Menu Item: " + menuResults[0].menu_item_name;
+    var resultGeoLat = menuResults[0].geo.lat;
+    var resultGeoLon = menuResults[0].geo.lon;
+    console.log(resultGeoLon);
+    console.log(resultGeoLat);
+    var staticMap = $('<img src="https://maps.googleapis.com/maps/api/staticmap?center='+resultGeoLat+','+ resultGeoLon+'zoom=14&size=400x400&key=AIzaSyAoEZ5plSSL8WtrfHP-1-MHmQgcNtSr0wQ">')
+    var option = $('<div class="col col-12 p-1 options">');
+    option.text(resultText);
+    option.appendTo("#display");
+    staticMap.appendTo("#display");
+  })
+};
 
 
 
@@ -176,29 +204,6 @@ $("#nutrients").on('click', function (){
       "x-rapidapi-key": "fe9110a17emshef9973a41fd039bp17d9e1jsn166b23aaa528"
     }
   }
-  });
- 
-function apiCall2(idValue, restaurant_name) {
-  var settings2 = {
-    "async": true,
-    "crossDomain": true,
-    "url": "https://us-restaurant-menus.p.rapidapi.com/restaurant/" + idValue + "/menuitems?page=1",
-    "method": "GET",
-    "headers": {
-      "x-rapidapi-host": "us-restaurant-menus.p.rapidapi.com",
-      "x-rapidapi-key": "9b86b8e8a6mshdc12005b60b2e9bp17f3b5jsn2a7b1e24c609"
-    }
-  }
-  $.ajax(settings2).then(function (response2) {
-    var menuResults = response2.result.data;
-    console.log(menuResults);
-    var resultText = "Restaurant:" + restaurant_name + "|| Menu Item: " + menuResults[0].menu_item_name;
-    var option = $('<div class="col col-12 p-1 options">');
-    option.text(resultText);
-    option.appendTo("#display");
-  })
-};
-
 
  $.ajax(nutritionix).done(function (response) {
       var place = response.hits;
@@ -213,12 +218,14 @@ function apiCall2(idValue, restaurant_name) {
   
     });
 
-
-
-
-
-  $.ajax(settings).done(function (response) {
-    console.log(response);
-    console.log("-----------------------------------------------------------------------")
   });
+
+
+var array2 = [];
+
+function stringPush(x,y,z){
+  x.push(z);
+  y.push(z);
+}
+  
 
