@@ -123,6 +123,7 @@ view.ui.add(track, "top-left");
 
 // ArcGis Section End-----------------------------------------------------------------------------------------------------------------------------------
 $(document).ready(function () {
+  $(".screen-toggle").hide();;
   $(".error-screen").hide();
   $(".screen-one").show();
   $(".screen-three").hide();
@@ -137,6 +138,11 @@ $(document).ready(function () {
     $("#add-options").click();
    };
   });
+
+  $(".screen-toggle").on('click',function(){
+    $(".screen-one").toggle();
+    $(".screen-three").toggle();
+  })
 
   $("#add-options").on('click', function () {
     var userInput = $("#options-add").val().trim();
@@ -168,6 +174,7 @@ $(document).ready(function () {
     $(".error-screen").hide();
     $(".screen-three").hide();
     $(".screen-one").show();
+    $(".screen-toggle").hide();;
   })
 
   $("#zip-search").on('keyup', function(event){
@@ -219,7 +226,7 @@ $("#font-size-minus").click(function() {
         .then(function (response) {
         
           var results = response.result.data;
-          for (i = 0; i < results.length; i++) {
+          for (i = 0; i < 3; i++) {
             var items = userArray;
             var cuisine = results[i].cuisines;
             var display = true;
@@ -246,6 +253,7 @@ $("#font-size-minus").click(function() {
             };
             input1 = "";
             $("#zip-search").val("");
+            $(".screen-toggle").show();
             $(".screen-one").hide();
             $(".screen-three").show();
           };
@@ -335,7 +343,7 @@ $("#nutrients").on('click', function (){
       $("#facts").empty();
       var place = response.hits;
       var health = $('<div>');
-      health.text(place[0].fields.item_name + " Calories: " + place[0].fields.nf_calories + "J" + " Fat: " + place[0].fields.nf_total_fat) + "G";
+      health.text(place[0].fields.item_name + " Calories: " + place[0].fields.nf_calories + " J " + " Fat: " + place[0].fields.nf_total_fat) + " g ";
       health.appendTo('#facts');
       $(".facts-card").show();
       // $('#restaurant').val();
