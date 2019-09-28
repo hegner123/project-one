@@ -123,6 +123,7 @@ view.ui.add(track, "top-left");
 
 // ArcGis Section End-----------------------------------------------------------------------------------------------------------------------------------
 $(document).ready(function () {
+  $(".screen-toggle").hide();;
   $(".error-screen").hide();
   $(".screen-one").show();
   $(".screen-three").hide();
@@ -137,6 +138,11 @@ $(document).ready(function () {
     $("#add-options").click();
    };
   });
+
+  $(".screen-toggle").on('click',function(){
+    $(".screen-one").toggle();
+    $(".screen-three").toggle();
+  })
 
   $("#add-options").on('click', function () {
     var userInput = $("#options-add").val().trim();
@@ -197,7 +203,7 @@ $(document).ready(function () {
       $.ajax(settings)
         .then(function (response) {
           var results = response.result.data;
-          for (i = 0; i < results.length; i++) {
+          for (i = 0; i < 3; i++) {
             var items = userArray;
             var cuisine = results[i].cuisines;
             var display = true;
@@ -224,6 +230,7 @@ $(document).ready(function () {
             };
             input1 = "";
             $("#zip-search").val("");
+            $(".screen-toggle").show();
             $(".screen-one").hide();
             $(".screen-three").show();
           };
