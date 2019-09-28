@@ -29,9 +29,9 @@ Group Goals 2:
 Group Goals 1:
 
 - [x] Chris – Use input fields for API queries;
-- [x]Jonathan – Have multiple points on map;
-- [x]Jordan – brainstorm layout ideas, research moment.js, 
-- [x]Michael – Use input fields for API queries;
+- [x] Jonathan – Have multiple points on map;
+- [x] Jordan – brainstorm layout ideas, research moment.js, 
+- [x] Michael – Use input fields for API queries;
 
 
 
