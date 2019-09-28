@@ -114,9 +114,7 @@ $(document).ready(function () {
     $("#display").empty()
   })
 
-  function compare(x, y) {
-    return y.search(x);
-  }
+  
 
   $("#api-request").on("click", function () {
     $(".screen-three").hide();
@@ -139,39 +137,46 @@ $(document).ready(function () {
         .then(function (response) {
           var results = response.result.data;
           for (i = 0; i < results.length; i++) {
-            console.log(results[i].cuisines);
             var items = userArray;
             var cuisine = results[i].cuisines;
             var display = true;
+            // Filter loops, for each item in cuisine, check each item in user array and determine if there is a match
+            // Used a boolean display to control whether or not the results are displayed
             for (j = 0; j < cuisine.length; j++) {
-              console.log("loop1");
               for (k = 0; k <items.length; k++){
                 if (cuisine[j] === items[k]){
                   display = false;
-                  console.log("fail");
                 };
               };
             };
             if (display === true) {
               idValue = results[i].restaurant_id;
               var idName = results[i].restaurant_name;
-              console.log(idName);
-              console.log("----------------------------------------")
+              
+              
               apiCall2(idValue, idName);
-            }
+              $(".options").on('click',function(){
+                console.log("this");
+                $(this).children().toggle();
+              });
+              
+            };
             input1 = "";
             $("#zip-search").val("");
             $(".screen-one").hide();
             $(".screen-three").show();
-
-          }
+          };
+          
         });
     } else {
       $("#display").text("Please enter a zip code");
     };
-  })
+    
+  });
 
+  // AJAX CALL for menu items based on first ajax call
 function apiCall2(idValue, restaurant_name) {
+  // settings for second AJAX CALL
   var settings2 = {
     "async": true,
     "crossDomain": true,
@@ -183,14 +188,17 @@ function apiCall2(idValue, restaurant_name) {
     }
   }
   $.ajax(settings2).then(function (response2) {
+    // creates variable to quickly access data in the JSON data response
     var menuResults = response2.result.data;
-    console.log(menuResults);
+    // creates string to be displayed as Result;
     var resultText = "Restaurant:" + restaurant_name + "|| Menu Item: " + menuResults[0].menu_item_name;
-    // var resultGeoLat = menuResults[0].geo.lat;
-    // var resultGeoLon = menuResults[0].geo.lon;
+    // variables to send to google maps static map API;
     var streetAdr = menuResults[0].address.street;
     var cityAdr = menuResults[0].address.city;
     var stateAdr = menuResults[0].address.state;
+
+    // var resultGeoLat = menuResults[0].geo.lat;
+    // var resultGeoLon = menuResults[0].geo.lon;
     // var zipAdr = menuResults[0].address.zip;
     // console.log(resultGeoLon);
     // console.log(resultGeoLat);
@@ -204,12 +212,13 @@ function apiCall2(idValue, restaurant_name) {
     staticMap.appendTo(option);
     $(".static-map").hide();
     
-  })
+    
+  });
 };
 
-$(".options").on('click',function(){
-  $(this).children().show();
-})
+
+
+
 
 
 $("#nutrients").on('click', function (){
@@ -223,16 +232,21 @@ $("#nutrients").on('click', function (){
       "x-rapidapi-host": "nutritionix-api.p.rapidapi.com",
       "x-rapidapi-key": "fe9110a17emshef9973a41fd039bp17d9e1jsn166b23aaa528"
     }
-  }
-
+  };
  $.ajax(nutritionix).done(function (response) {
       var place = response.hits;
-      
       var health = $('<div>');
       health.text(place[0].fields.item_name + " " + place[0].fields.nf_calories + " " + place[0].fields.nf_total_fat);
       health.appendTo('#facts');
       // $('#restaurant').val();
       // return facts
     });
+    
   });
+
+
+
+
+
+
   });
