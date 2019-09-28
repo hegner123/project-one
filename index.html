@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -14,10 +13,10 @@
   <link rel="icon" type="image/png" sizes="16x16" href="assets/images/logo/favicon-16x16.png">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
     integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
-  </script>
+    </script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
-  </script>
+    </script>
   <script src="https://www.gstatic.com/firebasejs/7.0.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/6.6.1/firebase-database.js"></script>
   <script src="https://js.arcgis.com/4.12/"></script>
@@ -80,7 +79,7 @@
                 <div class="row error-screen text-center">
                   <div class="error bg-danger col-12 col-lg-5">Please enter a zip code</div>
                 </div>
-                
+
 
                 <div class="row my-3">
                   <div class="input-group col-10 col-lg-5">
@@ -109,7 +108,7 @@
 
                 <div class="row">
                     <div class="input-group thing">
-                        <div class="col col-12 col-lg-5">
+                        <div class="col col-10 col-lg-5">
                               <button class="btn btn-outline-light form-control screen-toggle">Results</button>
                         </div>
                     </div>
@@ -128,12 +127,15 @@
           <div class="row">
               <div class="display col-10 col-lg-5 m-5">
                   <h1 class="col-12">Restaurants near you!</h1>
-        
+                  <div class="btn-group ml-3">
+                    <button class="btn btn-outline-light btn-sm" id="font-size-minus">-</button>
+                    <button class="btn btn-outline-light btn-sm" id="font-size-plus">+</button>
+                  </div>
                   <div id="display" class="col-10"></div>
-                  
                   <button class="btn btn-outline-light form-control screen-toggle">Search Again</button>
+                  
                 </div>
-                <div class="col col-10 col-lg-5 my-5 mx-0" id="mapDiv">
+                <div class="col col-10 col-lg-4 m-5" id="mapDiv">
                   <div id="viewDiv" class="col col-10"></div>
                   <div id="mapToggle"></div>
                 </div>
@@ -141,6 +143,7 @@
            
       
 
+<<<<<<< HEAD
 <<<<<<< HEAD
         <div class="display col-10 col-lg-5 m-5">
           <h1 class="col-12">Restaurants near you!</h1>
@@ -155,6 +158,9 @@
 =======
 >>>>>>> 5c81d711a68d64dd5853f3d4b6f53a27b0453beb
         </div>
+=======
+     
+>>>>>>> a0b577742d9523dfa27c36b248acb30b77d5ef02
 
         
         <!-- <div class="row">

@@ -174,6 +174,7 @@ $(document).ready(function () {
     $(".error-screen").hide();
     $(".screen-three").hide();
     $(".screen-one").show();
+    $(".screen-toggle").hide();;
   })
 
   $("#zip-search").on('keyup', function(event){
@@ -182,6 +183,27 @@ $(document).ready(function () {
     $("#api-request").click();
    };
   });
+// -----------------------------
+// Increase Font Size for Results
+
+$("#font-size-plus").click(function() {
+  var currentSize = $(".options").css('font-size');
+  var currentSize = parseFloat(currentSize)*1.2;
+  $(".options").css('font-size', currentSize);
+  return false;
+
+});
+$("#font-size-minus").click(function() {
+  var currentSize = $(".options").css('font-size');
+  var currentSize = parseFloat(currentSize)*.8;
+  $(".options").css('font-size', currentSize);
+  return false;
+});
+
+
+
+  
+// -----------------------------
 
   $("#api-request").on("click", function () {
     $(".screen-three").hide();
@@ -202,8 +224,9 @@ $(document).ready(function () {
       }
       $.ajax(settings)
         .then(function (response) {
+        
           var results = response.result.data;
-          for (i = 0; i < 3; i++) {
+          for (i = 0; i < results.length; i++) {
             var items = userArray;
             var cuisine = results[i].cuisines;
             var display = true;
