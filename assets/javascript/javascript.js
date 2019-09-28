@@ -155,6 +155,13 @@ $(document).ready(function () {
     $(".options-card").hide();
   })
 
+  $("#food").on('keyup', function(event){
+    if (event.keyCode === 13) {
+      event.preventDefault();
+     $("#nutrients").click();
+    };
+   });
+
   $(".api-reset").on("click", function () {
     $("#display").empty()
     $("#zip-search").val("");
@@ -289,7 +296,8 @@ function apiCall2(idValue, restaurant_name) {
 
 
 $("#nutrients").on('click', function (){
-  
+  console.log('click');
+  var input2 = $('#food').val();
   var nutritionix = {
     "async": true,
     "crossDomain": true,
@@ -301,6 +309,8 @@ $("#nutrients").on('click', function (){
     }
   };
  $.ajax(nutritionix).done(function (response) {
+      $('#food').val("");
+      $("#facts").empty();
       var place = response.hits;
       var health = $('<div>');
       health.text(place[0].fields.item_name + " Calories: " + place[0].fields.nf_calories + "J" + " Fat: " + place[0].fields.nf_total_fat) + "G";
@@ -311,9 +321,6 @@ $("#nutrients").on('click', function (){
     });
     
   });
-
-
-
 
 
 
