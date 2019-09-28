@@ -189,6 +189,7 @@ $(document).ready(function () {
       }
       $.ajax(settings)
         .then(function (response) {
+        
           var results = response.result.data;
           for (i = 0; i < results.length; i++) {
             var items = userArray;
