@@ -1,3 +1,28 @@
+// stored api keys in firebase
+var firebaseConfig = {
+  apiKey: "AIzaSyDNiASGDyPT5wj1zAz5Gc55g-wYHcjsG10",
+  authDomain: "hegner123-38bad.firebaseapp.com",
+  databaseURL: "https://hegner123-38bad.firebaseio.com",
+  projectId: "hegner123-38bad",
+  storageBucket: "",
+  messagingSenderId: "385773929972",
+  appId: "1:385773929972:web:04d34742f6c0d0a17f25a1"
+};
+var usMenuKey;
+var googleKey;
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+var database = firebase.database();
+var accessData = firebase.database().ref("keys");
+    accessData.once("value")
+    .then(function(snapshot){
+  usMenuKey = snapshot.child("us-menu").val()
+  googleKey = snapshot.child("googleMapKey").val()
+    });
+
+
+
+
 // Arcgis Code Section----------------------------------------------------------------------
 require([
   "esri/Map",
@@ -130,7 +155,7 @@ $(document).ready(function () {
         "method": "GET",
         "headers": {
           "x-rapidapi-host": "us-restaurant-menus.p.rapidapi.com",
-          "x-rapidapi-key": "9b86b8e8a6mshdc12005b60b2e9bp17f3b5jsn2a7b1e24c609"
+          "x-rapidapi-key": usMenuKey
         }
       }
       $.ajax(settings)
@@ -184,7 +209,7 @@ function apiCall2(idValue, restaurant_name) {
     "method": "GET",
     "headers": {
       "x-rapidapi-host": "us-restaurant-menus.p.rapidapi.com",
-      "x-rapidapi-key": "9b86b8e8a6mshdc12005b60b2e9bp17f3b5jsn2a7b1e24c609"
+      "x-rapidapi-key": usMenuKey
     }
   }
   $.ajax(settings2).then(function (response2) {
@@ -203,7 +228,7 @@ function apiCall2(idValue, restaurant_name) {
     // console.log(resultGeoLon);
     // console.log(resultGeoLat);
     // var staticUrl = 'https://maps.googleapis.com/maps/api/staticmap?center=' + resultGeoLat + ','+ resultGeoLon + '&zoom=18&size=400x400&key=AIzaSyAoEZ5plSSL8WtrfHP-1-MHmQgcNtSr0wQ'
-    var staticUrl = 'https://maps.googleapis.com/maps/api/staticmap?center=' + streetAdr + '+' + cityAdr + '+' + stateAdr + '+' + '&zoom=17&size=400x400&key=AIzaSyAoEZ5plSSL8WtrfHP-1-MHmQgcNtSr0wQ'
+    var staticUrl = 'https://maps.googleapis.com/maps/api/staticmap?center=' + streetAdr + '+' + cityAdr + '+' + stateAdr + '+' + '&zoom=17&size=400x400&key=' + googleKey;
     var staticMap = $('<img class=" col col-12 static-map" data="'+ restaurant_name +'"src="'+ staticUrl +'">')
     var option = $('<div class="col col-12 p-5 options">');
     option.text(resultText);
