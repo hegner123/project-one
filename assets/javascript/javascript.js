@@ -155,6 +155,13 @@ $(document).ready(function () {
     $(".options-card").hide();
   })
 
+  $("#food").on('keyup', function(event){
+    if (event.keyCode === 13) {
+      event.preventDefault();
+     $("#nutrients").click();
+    };
+   });
+
   $(".api-reset").on("click", function () {
     $("#display").empty()
     $("#zip-search").val("");
