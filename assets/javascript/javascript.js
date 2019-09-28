@@ -289,12 +289,8 @@ function apiCall2(idValue, restaurant_name) {
 
 
 $("#nutrients").on('click', function (){
-<<<<<<< HEAD
   console.log('click');
   var input2 = $('#food').val();
-=======
-  
->>>>>>> 2201a1d67875738df2191132931662c7b013ac2c
   var nutritionix = {
     "async": true,
     "crossDomain": true,
@@ -310,25 +306,12 @@ $("#nutrients").on('click', function (){
       var health = $('<div>');
       health.text(place[0].fields.item_name + " Calories: " + place[0].fields.nf_calories+ " Fat: " + place[0].fields.nf_total_fat);
       health.appendTo('#facts');
-<<<<<<< HEAD
-  
-=======
       $(".facts-card").show();
       // $('#restaurant').val();
       // return facts
->>>>>>> 2201a1d67875738df2191132931662c7b013ac2c
     });
     
   });
-<<<<<<< HEAD
-
-  
-  
-=======
->>>>>>> 2201a1d67875738df2191132931662c7b013ac2c
-
-
-
 
 
 
