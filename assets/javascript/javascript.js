@@ -320,7 +320,7 @@ $("#nutrients").on('click', function (){
       $("#facts").empty();
       var place = response.hits;
       var health = $('<div>');
-      health.text(place[0].fields.item_name + " Calories: " + place[0].fields.nf_calories + "J" + " Fat: " + place[0].fields.nf_total_fat) + "G";
+      health.text(place[0].fields.item_name + " Calories: " + place[0].fields.nf_calories + " J " + " Fat: " + place[0].fields.nf_total_fat) + " g ";
       health.appendTo('#facts');
       $(".facts-card").show();
       // $('#restaurant').val();
