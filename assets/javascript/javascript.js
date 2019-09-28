@@ -42,10 +42,11 @@ $(document).ready(function(){
 
 $("#nutrients").on('click', function (){
   console.log('click');
+  var input2 = $('#food').val();
   var nutritionix = {
     "async": true,
     "crossDomain": true,
-    "url": "https://nutritionix-api.p.rapidapi.com/v1_1/search/cheddar%20cheese?fields=item_name%2Citem_id%2Cbrand_name%2Cnf_calories%2Cnf_total_fat",
+    "url": "https://nutritionix-api.p.rapidapi.com/v1_1/search/" + input2 + "?fields=item_name%2Citem_id%2Cbrand_name%2Cnf_calories%2Cnf_total_fat",
     "method": "GET",
     "headers": {
       "x-rapidapi-host": "nutritionix-api.p.rapidapi.com",
@@ -59,18 +60,16 @@ $("#nutrients").on('click', function (){
       var place = response.hits;
       console.log(place);
       var health = $('<div>');
-      health.text(place[0].fields.item_name + " " + place[0].fields.nf_calories + " " + place[0].fields.nf_total_fat);
+      health.text(place[0].fields.item_name + " Calories: " + place[0].fields.nf_calories+ " Fat: " + place[0].fields.nf_total_fat);
       health.appendTo('#facts');
-     
-     
-      // $('#restaurant').val();
-      // return facts
   
     });
     
     
 
   });
+
+  
   
 
 
