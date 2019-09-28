@@ -1,3 +1,4 @@
+// Arcgis Code Section----------------------------------------------------------------------
 require([
   "esri/Map",
   "esri/views/MapView",
@@ -84,93 +85,19 @@ require([
   });
   view.graphics.add(pointGraphic);
 });
-// -----------------------------------------------------------------------------------------------------------------------------------
+
+
+
+// ArcGis Section End-----------------------------------------------------------------------------------------------------------------------------------
 $(document).ready(function () {
   $(".screen-one").show();
   $(".screen-three").hide();
- \
-
-  function compare(x, y) {
-    return y.search(x);
-  }
-
   // zip search
-  $("#api-request").on("click", function () {
-    $(".screen-three").hide();
-
-
-
-
-  // ***************************************************************
-  var search = new Search({
-    view: view
-  });
-  view.ui.add(search, "top-right"); // Add to the map
-
-  // Find address
-
-  view.on("click", function (evt) {
-    search.clear();
-    view.popup.clear();
-    if (search.activeSource) {
-      var geocoder = search.activeSource.locator; // World geocode service
-      var params = {
-        location: evt.mapPoint
-      };
-      geocoder.locationToAddress(params)
-        .then(function (response) { // Show the address found
-          var address = response.address;
-          showPopup(address, evt.mapPoint);
-        }, function (err) { // Show no address found
-          showPopup("No address found.", evt.mapPoint);
-        });
-    }
-  });
-
-  function showPopup(address, pt) {
-    view.popup.open({
-      title: +Math.round(pt.longitude * 100000) / 100000 + ", " + Math.round(pt.latitude * 100000) / 100000,
-      content: address,
-      location: pt
-    });
-  }
-  // ***************************************************************
-
-  var basemapToggle = new BasemapToggle({
-    view: view,
-    nextBasemap: "streets-navigation-vector"
-  })
-  view.ui.add(basemapToggle, "bottom-right");
-  var trailheadsLayer = new FeatureLayer({
-    url: "https://services.arcgis.com/V6ZHFr6zdgNZuVG0/arcgis/rest/services/Landscape_Trees/FeatureServer/0"
-  })
-  map.add(trailheadsLayer);
-  var point = {
-    type: "point",
-    longitude: -77.5387,
-    latitude: 37.5752,
-  };
-  var simpleMarkerSymbol = {
-    type: "simple-marker",
-    color: (0, 0, 255),
-    outline: {
-      color: [0, 0, 255],
-      width: .5
-    }
-  };
-  var pointGraphic = new Graphic({
-    geometry: point,
-    symbol: simpleMarkerSymbol
-  });
-  view.graphics.add(pointGraphic);
-});
-// -----------------------------------------------------------------------------------------------------------------------------------
-$(document).ready(function () {
   var userArray = [];
 
   $("#add-options").on('click', function () {
     var userInput = $("#options-add").val().trim();
-    var output = $("<div>");
+    var output = $('<div class="user-item">');
     output.text(userInput);
     output.appendTo(".options-display");
     userArray.push(userInput);
@@ -183,13 +110,16 @@ $(document).ready(function () {
     $(".options-display").empty()
   })
 
+  $("#api-reset").on("click", function () {
+    $("#display").empty()
+  })
+
   function compare(x, y) {
     return y.search(x);
   }
 
-  // zip search
   $("#api-request").on("click", function () {
-
+    $(".screen-three").hide();
     var input1 = $("#zip-search").val();
     var inputCheck = input1.toString();
     var idValue;
@@ -207,27 +137,28 @@ $(document).ready(function () {
       }
       $.ajax(settings)
         .then(function (response) {
-          var results = response.result.data
-          console.log(results);
-          for (i = 0; i < 10; i++) {
-            console.log(results[i].cuisines)
-            var items = userArray.toString(", ");
-            var cuisine = results[i].cuisines
+          var results = response.result.data;
+          for (i = 0; i < results.length; i++) {
+            console.log(results[i].cuisines);
+            var items = userArray;
+            var cuisine = results[i].cuisines;
             var display = true;
             for (j = 0; j < cuisine.length; j++) {
-              if (compare(cuisine[j], items) === 0) {
-                display = false;
-                console.log("fail");
+              console.log("loop1");
+              for (k = 0; k <items.length; k++){
+                if (cuisine[j] === items[k]){
+                  display = false;
+                  console.log("fail");
+                };
               };
             };
             if (display === true) {
               idValue = results[i].restaurant_id;
               var idName = results[i].restaurant_name;
               console.log(idName);
+              console.log("----------------------------------------")
               apiCall2(idValue, idName);
             }
-
-
             input1 = "";
             $("#zip-search").val("");
             $(".screen-one").hide();
@@ -239,63 +170,7 @@ $(document).ready(function () {
       $("#display").text("Please enter a zip code");
     };
   })
-})
 
-
-
-
-
-    function apiCall2(idValue, restaurant_name) {
-      var settings2 = {
-        "async": true,
-        "crossDomain": true,
-        "url": "https://us-restaurant-menus.p.rapidapi.com/restaurant/" + idValue + "/menuitems?page=1",
-        "method": "GET",
-        "headers": {
-          "x-rapidapi-host": "us-restaurant-menus.p.rapidapi.com",
-          "x-rapidapi-key": "9b86b8e8a6mshdc12005b60b2e9bp17f3b5jsn2a7b1e24c609"
-        }
-      }
-      $.ajax(settings2).then(function (response2) {
-        var menuResults = response2.result.data;
-        console.log(menuResults);
-        var resultText = "Restaurant:" + restaurant_name + "|| Menu Item: " + menuResults[0].menu_item_name;
-        var option = $('<div>');
-        option.text(resultText);
-        option.appendTo("#display");
-        
-      })
-    };
-    
-    
-    
-    
-    
-    
-    
-    
-  })
-
-
-
- 
-  
-  
-
-$("#nutrients").on('click', function (){
-  console.log('click');
-  var nutritionix = {
-    "async": true,
-    "crossDomain": true,
-    "url": "https://nutritionix-api.p.rapidapi.com/v1_1/search/cheddar%20cheese?fields=item_name%2Citem_id%2Cbrand_name%2Cnf_calories%2Cnf_total_fat",
-    "method": "GET",
-    "headers": {
-      "x-rapidapi-host": "nutritionix-api.p.rapidapi.com",
-      "x-rapidapi-key": "fe9110a17emshef9973a41fd039bp17d9e1jsn166b23aaa528"
-    }
-  }
-  });
- 
 function apiCall2(idValue, restaurant_name) {
   var settings2 = {
     "async": true,
@@ -311,34 +186,53 @@ function apiCall2(idValue, restaurant_name) {
     var menuResults = response2.result.data;
     console.log(menuResults);
     var resultText = "Restaurant:" + restaurant_name + "|| Menu Item: " + menuResults[0].menu_item_name;
-    var option = $('<div>');
+    // var resultGeoLat = menuResults[0].geo.lat;
+    // var resultGeoLon = menuResults[0].geo.lon;
+    var streetAdr = menuResults[0].address.street;
+    var cityAdr = menuResults[0].address.city;
+    var stateAdr = menuResults[0].address.state;
+    // var zipAdr = menuResults[0].address.zip;
+    // console.log(resultGeoLon);
+    // console.log(resultGeoLat);
+    // var staticUrl = 'https://maps.googleapis.com/maps/api/staticmap?center=' + resultGeoLat + ','+ resultGeoLon + '&zoom=18&size=400x400&key=AIzaSyAoEZ5plSSL8WtrfHP-1-MHmQgcNtSr0wQ'
+    var staticUrl = 'https://maps.googleapis.com/maps/api/staticmap?center=' + streetAdr + '+' + cityAdr + '+' + stateAdr + '+' + '&zoom=17&size=400x400&key=AIzaSyAoEZ5plSSL8WtrfHP-1-MHmQgcNtSr0wQ'
+    var staticMap = $('<img class=" col col-12 static-map" data="'+ restaurant_name +'"src="'+ staticUrl +'">')
+    var option = $('<div class="col col-12 p-5 options">');
     option.text(resultText);
+    option.attr('data', restaurant_name)
     option.appendTo("#display");
+    staticMap.appendTo(option);
+    $(".static-map").hide();
+    
   })
 };
 
+$(".options").on('click',function(){
+  $(this).children().show();
+})
+
+
+$("#nutrients").on('click', function (){
+  
+  var nutritionix = {
+    "async": true,
+    "crossDomain": true,
+    "url": "https://nutritionix-api.p.rapidapi.com/v1_1/search/cheddar%20cheese?fields=item_name%2Citem_id%2Cbrand_name%2Cnf_calories%2Cnf_total_fat",
+    "method": "GET",
+    "headers": {
+      "x-rapidapi-host": "nutritionix-api.p.rapidapi.com",
+      "x-rapidapi-key": "fe9110a17emshef9973a41fd039bp17d9e1jsn166b23aaa528"
+    }
+  }
 
  $.ajax(nutritionix).done(function (response) {
       var place = response.hits;
-      console.log(place);
+      
       var health = $('<div>');
       health.text(place[0].fields.item_name + " " + place[0].fields.nf_calories + " " + place[0].fields.nf_total_fat);
       health.appendTo('#facts');
-     
-     
       // $('#restaurant').val();
       // return facts
-  
     });
-
-
-
-
-
-})
-
-  $.ajax(settings).done(function (response) {
-    console.log(response);
-    console.log("-----------------------------------------------------------------------")
   });
-}
+  });

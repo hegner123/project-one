@@ -12,6 +12,17 @@ body{
   width: 100%;
 }
 
+.user-item {
+  
+  font-weight: bold;
+  color:white;
+}
+
+.options{
+  font-weight: bold;
+  color:white;
+}
+
 #display {
 
   background: grey;

@@ -14,60 +14,48 @@
   <script src="assets/javascript/javascript.js"></script>
   <title>C-Jam Project One</title>
 </head>
+  <body>
+    <div class="container">
 
-
-
-
-<body>
-  <div class="container">
-
-    <button id="thing">screen-one</button>
-
-
-    <div class="screen-one">
-
-    <div class="row">
-      <div class="col col-12 mt-5 main-section">
+      <div class="screen-one">
         <div class="row">
-          <div class="col col-12 mt-5">
+          <div class="col col-12 mt-5 main-section">
+            <div class="row">
+              <div class="col col-12 mt-5">
+                <input type="text" name="options-add" id="options-add">
+                <button id="add-options">Add</button>
+                <button id="reset">Reset</button>
+                <div class="options-display"></div> 
+              </div>
 
-            <input type="text" name="options-add" id="options-add">
-            <button id="add-options">Add</button>
-            <button id="reset">Reset</button>
-            <div class="options-display"></div> 
+              <div class="col col-12 mt-3">
+                <input type="number" name="zip-search" id="zip-search">
+                <button id="api-request">Zip Search</button>
+                <button id="api-reset">Reset</button>
+                <button id="call">Test</button>
+                <input type="text" name="restaurant" id="restaurant">
+                <button id="nutrients">What's in it</button>
+                <div id="facts"></div>
+              </div>
+
+              
+            </div>
           </div>
-
-          <div class="col col-12 mt-3">
-            <input type="number" name="zip-search" id="zip-search">
-            <button id="api-request">Zip Search</button>
-            <button id="call">Test</button>
-            <input type="text" name="restaurant" id="restaurant">
-            <button id="nutrients">What's in it</button>
-            <div id="facts"></div>
-          </div>
-
-          
         </div>
       </div>
-    </div>
-    </div>
 
+      <div class="screen-three">
+        <div class="row">
+            <div id="display" class="col col-12"></div>
 
-    <div class="screen-three">
-    <div class="row">
-        <div id="display" class="col col-12"></div>
-
-      <div class="col col-12" id="mapDiv">
-        <div id="viewDiv" class="col col-12"></div>
-        <div id="mapToggle"></div>
+          <div class="col col-12" id="mapDiv">
+            <div id="viewDiv" class="col col-12"></div>
+            <div id="mapToggle"></div>
+          </div>
+        </div>
       </div>
-    
+
     </div>
-
-
- 
-  </div>
-  
   </body>
 </html>
 
