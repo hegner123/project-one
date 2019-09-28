@@ -20,10 +20,10 @@ API Assignments:
 
 Group Goals 2:
 
-- Chris - Take input from US Menu api call 
-- Jonathan - Take input from US Menu api call
-- Jordan - Configure UI experience 
-- Michael - ~~Improve filtering of results~~; Prepare presentation; Help other members;
+- [x] Chris - Take input from US Menu api call 
+- [x] Jonathan - Take input from US Menu api call
+- [x] Jordan - Configure UI experience 
+- [x] Michael - ~~Improve filtering of results~~; Prepare presentation; Help other members;
 
 
 Group Goals 1:
