@@ -1,13 +1,14 @@
-html, body {
-  padding: 0;
-  margin: 0;
-  height: 100%;
-  width: 100%;
+body{
+  /* background-image: url('../images/tweed/tweed_@2X.png'); */
+  background:#7e7b7b;
+}
+
+.logo {
+  background:#d86a6a
 }
 
 .main-section {
-  background:grey;
-  height:40rem;
+  min-height:20rem;
 }
 
 .spacer {
@@ -15,21 +16,43 @@ html, body {
   width: 100%;
 }
 
-#display {
-  font-size:24px;
+.user-item {
+  font-weight: bold;
+}
+
+.options{
+  font-weight: bold;
+}
+
+.zip-label {
   color: white;
+  font-size:1rem;
+}
+
+.error {
+  color:white;
+}
+
+.display {
+  max-height: 30rem;
+  font-size:12px;
+  color: white;
+  overflow: auto;
+}
+
+#facts{
+  font-weight: bold;
+}
+
+#mapDiv{
+  height:30rem;
 }
 
 
 #viewDiv {
-  padding: 0%;
-  margin: 0;
-  height: 75%;
-  width: 75%;
+  height: 100%;
+  width:  100%;
 }
 
-#mapToggle {
-    height: 100%;
-    width: 100%;
-    float: right;
-}
+
+
