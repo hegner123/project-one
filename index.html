@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-
+<html lang="en">
 
 <head>
   <meta charset="utf-8">
@@ -16,47 +16,97 @@
   <script src="assets/javascript/javascript.js"></script>
   <title>C-Jam Project One</title>
 </head>
-  <body>
-    <div class="container">
 
-      <div class="screen-one">
-        <div class="row">
-          <div class="col col-12 mt-5 main-section">
-            <div class="row">
-              <div class="col col-12 mt-5">
-                <input type="text" name="options-add" id="options-add">
-                <button id="add-options">Add</button>
-                <button id="reset">Reset</button>
-                <div class="options-display"></div> 
-              </div>
+<body>
+  <div class="container">
 
-              <div class="col col-12 mt-3">
-                <input type="number" name="zip-search" id="zip-search">
-                <button id="api-request">Zip Search</button>
-                <button id="api-reset">Reset</button>
-                <button id="call">Test</button>
-                <input type="text" name="restaurant" id="restaurant">
-                <button id="nutrients">What's in it</button>
-                <div id="facts"></div>
+    <div class="screen-one">
+      <div class="row">
+        <div class="col col-12 mt-5 main-section">
+          <div class="row">
+            <div class="col col-12 mt-5">
+              <div class="form">
+                <div class="row my-3">
+                  <div class="input-group col-12 col-lg-5">
+                    <div class="input-group-prepend d-block" id="button-addon3">
+                      <button id="reset" class="btn btn-light d-inline-block" type="button">Reset</button>
+                    </div>
+                    <input type="text" class="form-control" name="options-add" id="options-add" placeholder="Filter"
+                      aria-label="" aria-describedby="button-addon3">
+                    <div class="input-group-append d-block">
+                      <button id="add-options" class="btn btn-light" type="button">Add</button>
+                    </div>
+                  </div>
+                  <div class="col-12 col-lg-5 options-card mt-3 mt-lg-0">
+                    <div class="card">
+                      <div class="card-body">
+                        <h5 class="card-title text-muted">Filters:</h5>
+                        <div class="options-display"></div> 
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row my-3">
+                  <div class="input-group col-12 col-lg-5">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="basic-addon1">Zip Code</span>
+                    </div>
+                    <input type="number" name="zip-search" id="zip-search" placeholder="12345" class="form-control">
+                    <div class="input-group-append">
+                      <button class="btn btn-light" id="api-request">Search</button>
+                      <button class="btn btn-light api-reset">Reset</button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row my-3">
+                  <div class="input-group col-12 col-lg-5">
+                    <div class="input-group-prepend d-block">
+                      <span class="input-group-text">Nutrition Info</span>
+                    </div>
+
+                    <input type="text" name="food" id="food" class="form-control">
+
+                    <div class="input-group-append d-block">
+                      <button class="btn btn-light" id="nutrients">Search</button>
+                    </div>
+                  </div>
+
+                  <div class="col-12 col-lg-5 my-3 mt-lg-0 mb-lg-3 facts-card">
+                    <div class="card ">
+                      <div class="card-body">
+                        <h5 class="card-title text-muted">Nutrition Info</h5>
+                        <div id="facts"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+    </div>
 
-      <div class="screen-three">
-        <div class="row">
-            <div id="display" class="col col-12"></div>
 
-          <div class="col col-12" id="mapDiv">
-            <div id="viewDiv" class="col col-12"></div>
-            <div id="mapToggle"></div>
-          </div>
+    <div class="screen-three mt-5">
+      <div class="row mt-5">
+          
+        <div class="display">
+          <h1>Restaurants near you!</h1>
+          <button class="btn btn-light api-reset mx-5">Reset</button>
+          <div id="display" class="col col-12"></div>
+        </div>
+
+        <div class="col col-12" id="mapDiv">
+          <div id="viewDiv" class="col col-12"></div>
+          <div id="mapToggle"></div>
         </div>
       </div>
-
     </div>
-  </body>
+
+  </div>
+</body>
+
 </html>
-
-

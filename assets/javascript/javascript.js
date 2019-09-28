@@ -10,14 +10,15 @@ var firebaseConfig = {
 };
 var usMenuKey;
 var googleKey;
+var nutritionixKey;
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 var database = firebase.database();
 var accessData = firebase.database().ref("keys");
-    accessData.once("value")
-    .then(function(snapshot){
-  usMenuKey = snapshot.child("us-menu").val()
-  googleKey = snapshot.child("googleMapKey").val()
+accessData.once("value").then(function(snapshot){
+usMenuKey = snapshot.child("us-menu").val();
+googleKey = snapshot.child("googleMapKey").val();
+nutritionixKey = snapshot.child("nutriKey").val();
     });
 
 
@@ -117,8 +118,19 @@ require([
 $(document).ready(function () {
   $(".screen-one").show();
   $(".screen-three").hide();
+  $(".options-card").hide();
+  $(".facts-card").hide();
   // zip search
   var userArray = [];
+
+  $("#options-add").on('keyup', function(event){
+   if (event.keyCode === 13) {
+     event.preventDefault();
+    $("#add-options").click();
+   };
+  });
+
+
 
   $("#add-options").on('click', function () {
     var userInput = $("#options-add").val().trim();
@@ -127,19 +139,28 @@ $(document).ready(function () {
     output.appendTo(".options-display");
     userArray.push(userInput);
     $("#options-add").val("");
+    $(".options-card").show();
   })
 
   $("#reset").on("click", function () {
     userArray = [];
     $("#options-add").val("");
     $(".options-display").empty()
+    $(".options-card").hide();
   })
 
-  $("#api-reset").on("click", function () {
+  $(".api-reset").on("click", function () {
     $("#display").empty()
+    $(".screen-three").hide();
+    $(".screen-one").show();
   })
 
-  
+  $("#zip-search").on('keyup', function(event){
+   if (event.keyCode === 13) {
+     event.preventDefault();
+    $("#api-request").click();
+   };
+  });
 
   $("#api-request").on("click", function () {
     $(".screen-three").hide();
@@ -230,7 +251,7 @@ function apiCall2(idValue, restaurant_name) {
     // var staticUrl = 'https://maps.googleapis.com/maps/api/staticmap?center=' + resultGeoLat + ','+ resultGeoLon + '&zoom=18&size=400x400&key=AIzaSyAoEZ5plSSL8WtrfHP-1-MHmQgcNtSr0wQ'
     var staticUrl = 'https://maps.googleapis.com/maps/api/staticmap?center=' + streetAdr + '+' + cityAdr + '+' + stateAdr + '+' + '&zoom=17&size=400x400&key=' + googleKey;
     var staticMap = $('<img class=" col col-12 static-map" data="'+ restaurant_name +'"src="'+ staticUrl +'">')
-    var option = $('<div class="col col-12 p-5 options">');
+    var option = $('<div class="col col-12 p-2 options">');
     option.text(resultText);
     option.attr('data', restaurant_name)
     option.appendTo("#display");
@@ -255,7 +276,7 @@ $("#nutrients").on('click', function (){
     "method": "GET",
     "headers": {
       "x-rapidapi-host": "nutritionix-api.p.rapidapi.com",
-      "x-rapidapi-key": "fe9110a17emshef9973a41fd039bp17d9e1jsn166b23aaa528"
+      "x-rapidapi-key": nutritionixKey 
     }
   };
  $.ajax(nutritionix).done(function (response) {
@@ -263,6 +284,7 @@ $("#nutrients").on('click', function (){
       var health = $('<div>');
       health.text(place[0].fields.item_name + " " + place[0].fields.nf_calories + " " + place[0].fields.nf_total_fat);
       health.appendTo('#facts');
+      $(".facts-card").show();
       // $('#restaurant').val();
       // return facts
     });
