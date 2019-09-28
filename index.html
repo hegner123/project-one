@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+  <script src="assets/javascript/popper.min.js"></script>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="https://js.arcgis.com/4.12/esri/themes/light/main.css">
@@ -10,7 +12,13 @@
   <link rel="apple-touch-icon" sizes="180x180" href="assets/images/logo/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="assets/images/logo/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="assets/images/logo/favicon-16x16.png">
-  
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+  </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+  </script>
   <script src="https://www.gstatic.com/firebasejs/7.0.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/6.6.1/firebase-database.js"></script>
   <script src="https://js.arcgis.com/4.12/"></script>
@@ -19,11 +27,12 @@
   <script src="assets/javascript/javascript.js"></script>
   <title>C-Jam Project One</title>
 </head>
+
 <body>
   <div class="container">
+    
     <div class="jumbotron screen-one logo mt-5 text-center">
       <img src="assets/images/logo/logo-via-logohub (1).png" alt="C-Jam">
-
     </div>
 
     <div class="screen-one logo mb-5">
@@ -38,7 +47,8 @@
                       <button id="reset" class="btn btn-light d-inline-block" type="button">Reset</button>
                     </div>
                     <input type="text" class="form-control" name="options-add" id="options-add" placeholder="Filter"
-                      aria-label="" aria-describedby="button-addon3">
+                      aria-label="" aria-describedby="button-addon3" data-toggle="popover"
+                      title="Use this to filter the results you do not want from our search">
                     <div class="input-group-append d-block">
                       <button id="add-options" class="btn btn-light" type="button">Add</button>
                     </div>
@@ -53,12 +63,14 @@
                   </div>
                 </div>
 
+
                 <div class="row my-3">
                   <div class="input-group col-12 col-lg-5">
                     <div class="input-group-prepend">
                       <span class="input-group-text" id="basic-addon1">Zip Code</span>
                     </div>
-                    <input type="number" name="zip-search" id="zip-search" placeholder="12345" class="form-control">
+                    <input type="number" name="zip-search" id="zip-search" placeholder="12345" class="form-control"
+                      data-toggle="popover" title="Enter a zip code to search.">
                     <div class="input-group-append">
                       <button class="btn btn-light" id="api-request">Search</button>
                       <button class="btn btn-light api-reset">Reset</button>
@@ -66,7 +78,7 @@
                   </div>
                 </div>
 
-                <div class="row my-3">
+                <div class="row d-none my-3">
                   <div class="input-group col-12 col-lg-5">
                     <div class="input-group-prepend d-block">
                       <span class="input-group-text">Nutrition Info</span>
@@ -89,28 +101,28 @@
                   </div>
                 </div>
               </div>
-            
+
+            </div>
           </div>
         </div>
       </div>
     </div>
-    </div>
 
 
-    <div class="screen-three logo mt-5">
+    <div class="screen-three logo m-5">
       <div class="row">
-          
+
         <div class="display col-12 col-lg-5 m-5">
           <h1 class="col-12">Restaurants near you!</h1>
-          <button class="btn btn-light api-reset mx-5">Reset</button>
+
           <div id="display" class="col-12"></div>
+          <button class="btn btn-light api-reset mx-5">Reset</button>
         </div>
         <div class="col col-12 col-lg-4 m-5" id="mapDiv">
-            <div id="viewDiv" class="col col-12"></div>
-            <div id="mapToggle"></div>
-          </div>
+          <div id="viewDiv" class="col col-12"></div>
+          <div id="mapToggle"></div>
+        </div>
 
-        
       </div>
     </div>
 

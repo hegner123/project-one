@@ -24,6 +24,8 @@ nutritionixKey = snapshot.child("nutriKey").val();
 
 
 
+
+
 // Arcgis Code Section----------------------------------------------------------------------
 require([
   "esri/Map",
@@ -116,6 +118,14 @@ require([
 
 // ArcGis Section End-----------------------------------------------------------------------------------------------------------------------------------
 $(document).ready(function () {
+  $(function () {
+    $('[data-toggle="popover"]').popover()
+  })
+  $(function () {
+    $('.example-popover').popover({
+      container: 'body'
+    })
+  })
   $(".screen-one").show();
   $(".screen-three").hide();
   $(".options-card").hide();
@@ -129,6 +139,9 @@ $(document).ready(function () {
     $("#add-options").click();
    };
   });
+
+
+  
 
 
 
@@ -215,7 +228,7 @@ $(document).ready(function () {
           
         });
     } else {
-      $("#display").text("Please enter a zip code");
+      $("").text("Please enter a zip code");
     };
     
   });
@@ -242,7 +255,8 @@ function apiCall2(idValue, restaurant_name) {
     var streetAdr = menuResults[0].address.street;
     var cityAdr = menuResults[0].address.city;
     var stateAdr = menuResults[0].address.state;
-
+    var restaurantAdr = menuResults[0].address.formatted;
+console.log(menuResults)
     // var resultGeoLat = menuResults[0].geo.lat;
     // var resultGeoLon = menuResults[0].geo.lon;
     // var zipAdr = menuResults[0].address.zip;
@@ -253,14 +267,27 @@ function apiCall2(idValue, restaurant_name) {
     var staticMap = $('<img class=" col col-12 static-map" data="'+ restaurant_name +'"src="'+ staticUrl +'">')
     var option = $('<div class="col col-12 p-2 options">');
     option.text(resultText);
-    option.attr('data', restaurant_name)
+    option.attr('data', restaurantAdr)
     option.appendTo("#display");
     staticMap.appendTo(option);
     $(".static-map").hide();
+    $(".options").on('click', function(event){
+      $(".esri-search__input").val("");
+      var addressData = $(this).attr('data');
+      $(".esri-search__input").val(addressData);
+      
+      $(".esri-search__submit-button").click();
+    })
+    
     
     
   });
 };
+
+
+  
+
+
 
 
 
