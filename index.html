@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -8,6 +7,10 @@
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="https://js.arcgis.com/4.12/esri/themes/light/main.css">
   <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/images/logo/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/images/logo/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/images/logo/favicon-16x16.png">
+  
   <script src="https://www.gstatic.com/firebasejs/7.0.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/6.6.1/firebase-database.js"></script>
   <script src="https://js.arcgis.com/4.12/"></script>
@@ -16,15 +19,18 @@
   <script src="assets/javascript/javascript.js"></script>
   <title>C-Jam Project One</title>
 </head>
-
 <body>
   <div class="container">
+    <div class="jumbotron screen-one logo mt-5 text-center">
+      <img src="assets/images/logo/logo-via-logohub (1).png" alt="C-Jam">
 
-    <div class="screen-one">
+    </div>
+
+    <div class="screen-one logo mb-5">
       <div class="row">
-        <div class="col col-12 mt-5 main-section">
+        <div class="col col-12 m-5 main-section">
           <div class="row">
-            <div class="col col-12 mt-5">
+            <div class="col col-12">
               <div class="form">
                 <div class="row my-3">
                   <div class="input-group col-12 col-lg-5">
@@ -83,26 +89,28 @@
                   </div>
                 </div>
               </div>
-            </div>
+            
           </div>
         </div>
       </div>
     </div>
+    </div>
 
 
-    <div class="screen-three mt-5">
-      <div class="row mt-5">
+    <div class="screen-three logo mt-5">
+      <div class="row">
           
-        <div class="display">
-          <h1>Restaurants near you!</h1>
+        <div class="display col-12 col-lg-5 m-5">
+          <h1 class="col-12">Restaurants near you!</h1>
           <button class="btn btn-light api-reset mx-5">Reset</button>
-          <div id="display" class="col col-12"></div>
+          <div id="display" class="col-12"></div>
         </div>
+        <div class="col col-12 col-lg-4 m-5" id="mapDiv">
+            <div id="viewDiv" class="col col-12"></div>
+            <div id="mapToggle"></div>
+          </div>
 
-        <div class="col col-12" id="mapDiv">
-          <div id="viewDiv" class="col col-12"></div>
-          <div id="mapToggle"></div>
-        </div>
+        
       </div>
     </div>
 
