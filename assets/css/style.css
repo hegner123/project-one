@@ -24,13 +24,13 @@ body{
   font-weight: bold;
 }
 
-#facts{
-  font-weight: bold;
-}
-
 .zip-label {
   color: white;
   font-size:1rem;
+}
+
+.error {
+  color:white;
 }
 
 .display {
@@ -40,14 +40,16 @@ body{
   overflow: auto;
 }
 
+#facts{
+  font-weight: bold;
+}
+
 #mapDiv{
   height:30rem;
-  
 }
 
 
 #viewDiv {
- 
   height: 100%;
   width:  100%;
 }

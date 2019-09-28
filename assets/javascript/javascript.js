@@ -118,14 +118,7 @@ require([
 
 // ArcGis Section End-----------------------------------------------------------------------------------------------------------------------------------
 $(document).ready(function () {
-  $(function () {
-    $('[data-toggle="popover"]').popover()
-  })
-  $(function () {
-    $('.example-popover').popover({
-      container: 'body'
-    })
-  })
+  $(".error-screen").hide();
   $(".screen-one").show();
   $(".screen-three").hide();
   $(".options-card").hide();
@@ -139,11 +132,6 @@ $(document).ready(function () {
     $("#add-options").click();
    };
   });
-
-
-  
-
-
 
   $("#add-options").on('click', function () {
     var userInput = $("#options-add").val().trim();
@@ -164,6 +152,8 @@ $(document).ready(function () {
 
   $(".api-reset").on("click", function () {
     $("#display").empty()
+    $("#zip-search").val("");
+    $(".error-screen").hide();
     $(".screen-three").hide();
     $(".screen-one").show();
   })
@@ -228,7 +218,10 @@ $(document).ready(function () {
           
         });
     } else {
-      $("").text("Please enter a zip code");
+      $("#zip-search").val("");
+      $(".error-screen").show();
+      console.log("this");
+      $(".error").text("");
     };
     
   });
@@ -256,7 +249,7 @@ function apiCall2(idValue, restaurant_name) {
     var cityAdr = menuResults[0].address.city;
     var stateAdr = menuResults[0].address.state;
     var restaurantAdr = menuResults[0].address.formatted;
-console.log(menuResults)
+    console.log(menuResults)
     // var resultGeoLat = menuResults[0].geo.lat;
     // var resultGeoLon = menuResults[0].geo.lon;
     // var zipAdr = menuResults[0].address.zip;
@@ -271,16 +264,12 @@ console.log(menuResults)
     option.appendTo("#display");
     staticMap.appendTo(option);
     $(".static-map").hide();
-    $(".options").on('click', function(event){
+    $(".options").on('click', function(){
       $(".esri-search__input").val("");
       var addressData = $(this).attr('data');
       $(".esri-search__input").val(addressData);
-      
       $(".esri-search__submit-button").click();
-    })
-    
-    
-    
+    });
   });
 };
 
