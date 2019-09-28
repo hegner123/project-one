@@ -30,13 +30,13 @@
 <body>
   <div class="container">
     
-    <div class="jumbotron screen-one logo mt-5 text-center">
+    <div class="jumbotron screen-one logo mt-2 text-center">
       <img src="assets/images/logo/logo-via-logohub (1).png" alt="C-Jam">
     </div>
 
-    <div class="screen-one logo mb-5">
+    <div class="screen-one logo">
       <div class="row">
-        <div class="col col-12 m-5 main-section">
+        <div class="col col-12 mx-5 main-section">
           <div class="row">
             <div class="col col-12">
               <div class="form">
@@ -103,6 +103,16 @@
                       </div>
                     </div>
                   </div>
+
+                  
+                </div>
+
+                <div class="row">
+                    <div class="input-group thing">
+                        <div class="col col-12 col-lg-5">
+                              <button class="btn btn-outline-light form-control screen-toggle">Results</button>
+                        </div>
+                    </div>
                 </div>
               </div>
             </div>
@@ -112,22 +122,41 @@
     </div>
 
 
-    <div class="screen-three logo m-5">
+    <div class="screen-three logo mt-2">
       <div class="row">
+        <div class="col col-12 m-3">
+          <div class="row">
+              <div class="display col-10 col-lg-5 m-5">
+                  <h1 class="col-12">Restaurants near you!</h1>
+        
+                  <div id="display" class="col-10"></div>
+                  
+                  <button class="btn btn-outline-light form-control screen-toggle">Search Again</button>
+                </div>
+                <div class="col col-10 col-lg-5 my-5 mx-0" id="mapDiv">
+                  <div id="viewDiv" class="col col-10"></div>
+                  <div id="mapToggle"></div>
+                </div>
+          </div>
+           
+      
 
-        <div class="display col-10 col-lg-5 m-5">
-          <h1 class="col-12">Restaurants near you!</h1>
+        </div>
 
-          <div id="display" class="col-10"></div>
-          <button class="btn btn-light api-reset mx-5">Reset</button>
-        </div>
-        <div class="col col-10 col-lg-4 m-5" id="mapDiv">
-          <div id="viewDiv" class="col col-10"></div>
-          <div id="mapToggle"></div>
-        </div>
+        
+        <!-- <div class="row">
+            <div class="input-group">
+                <div class="col col-12 col-lg-5">
+                   
+                </div>
+            </div>
+        </div> -->
 
       </div>
     </div>
+
+    
+    
 
   </div>
 </body>
