@@ -174,6 +174,7 @@ $(document).ready(function () {
     $(".error-screen").hide();
     $(".screen-three").hide();
     $(".screen-one").show();
+    $(".screen-toggle").hide();;
   })
 
   $("#zip-search").on('keyup', function(event){
