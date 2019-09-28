@@ -309,6 +309,8 @@ $("#nutrients").on('click', function (){
     }
   };
  $.ajax(nutritionix).done(function (response) {
+      $('#food').val("");
+      $("#facts").empty();
       var place = response.hits;
       var health = $('<div>');
       health.text(place[0].fields.item_name + " Calories: " + place[0].fields.nf_calories+ " Fat: " + place[0].fields.nf_total_fat);
