@@ -1,6 +1,6 @@
 // stored api keys in firebase
 var firebaseConfig = {
-  apiKey: "AIzaSyDNiASGDyPT5wj1zAz5Gc55g-wYHcjsG10",
+  apiKey: process.env.API_KEY,
   authDomain: "hegner123-38bad.firebaseapp.com",
   databaseURL: "https://hegner123-38bad.firebaseio.com",
   projectId: "hegner123-38bad",
